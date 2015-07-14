@@ -15,10 +15,12 @@ ActiveRecord::Schema.define(version: 20150713124123) do
 
   create_table "bookmarks", force: :cascade do |t|
     t.string   "name",        limit: 255
-    t.string   "url",         limit: 255
+    t.string   "url",         limit: 255, null: false
     t.string   "description", limit: 255
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
   end
+
+  add_index "bookmarks", ["url"], name: "index_bookmarks_on_url", using: :btree
 
 end
