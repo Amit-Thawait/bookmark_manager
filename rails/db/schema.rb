@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150713124123) do
+ActiveRecord::Schema.define(version: 20150715070943) do
 
   create_table "bookmarks", force: :cascade do |t|
     t.string   "name",        limit: 255
@@ -23,4 +23,24 @@ ActiveRecord::Schema.define(version: 20150713124123) do
 
   add_index "bookmarks", ["url"], name: "index_bookmarks_on_url", using: :btree
 
+  create_table "taggings", force: :cascade do |t|
+    t.integer  "bookmark_id", limit: 4
+    t.integer  "tag_id",      limit: 4
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+  end
+
+  add_index "taggings", ["bookmark_id"], name: "index_taggings_on_bookmark_id", using: :btree
+  add_index "taggings", ["tag_id"], name: "index_taggings_on_tag_id", using: :btree
+
+  create_table "tags", force: :cascade do |t|
+    t.string   "name",       limit: 255, null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "tags", ["name"], name: "index_tags_on_name", using: :btree
+
+  add_foreign_key "taggings", "bookmarks"
+  add_foreign_key "taggings", "tags"
 end
