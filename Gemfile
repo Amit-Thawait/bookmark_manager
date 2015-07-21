@@ -32,6 +32,14 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+group :development do
+
+  gem 'awesome_print'
+
+  gem 'hirb-unicode'
+
+end
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
@@ -47,10 +55,11 @@ gem 'bootstrap-sass', '~> 3.3.5'
 
 gem 'autoprefixer-rails'
 
-group :development do
+gem 'omniauth-github', :github => 'intridea/omniauth-github'
 
-  gem 'awesome_print'
+gem 'omniauth-twitter', :github => 'arunagw/omniauth-twitter'
 
-  gem 'hirb-unicode'
+gem 'omniauth-facebook', :github => 'mkdynamic/omniauth-facebook'
 
-end
+gem "omniauth-google-oauth2", :github => 'zquestz/omniauth-google-oauth2'
+
