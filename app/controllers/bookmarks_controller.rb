@@ -1,5 +1,6 @@
 class BookmarksController < ApplicationController
   before_action :set_bookmark, only: [:show, :edit, :update, :destroy]
+  after_action :create_tags, only: [:create, :update]
 
   # GET /bookmarks
   # GET /bookmarks.json
@@ -67,8 +68,17 @@ class BookmarksController < ApplicationController
       @bookmark = Bookmark.find(params[:id])
     end
 
+    def create_tags
+      @bookmark.all_tags = bookmark_tags_params[:all_tags]
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def bookmark_params
       params.require(:bookmark).permit(:name, :url, :description)
     end
+
+    def bookmark_tags_params
+      params.require(:bookmark).permit(:all_tags)
+    end
+
 end
