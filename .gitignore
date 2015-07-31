@@ -13,3 +13,5 @@
 /tmp
 
 .rvmrc
+.env
+.env.*
