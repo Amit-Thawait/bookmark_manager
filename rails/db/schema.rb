@@ -14,7 +14,7 @@
 ActiveRecord::Schema.define(version: 20150715070943) do
 
   create_table "bookmarks", force: :cascade do |t|
-    t.string   "name",        limit: 255
+    t.string   "name",        limit: 255, null: false
     t.string   "url",         limit: 255, null: false
     t.string   "description", limit: 255
     t.datetime "created_at",              null: false

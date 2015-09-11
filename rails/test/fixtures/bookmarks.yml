@@ -1,11 +1,15 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: 
+  id: 1
+  name: Bookmark1
   url: MyString
   description: MyString
+  tags: "tag1, tag2"
 
 two:
-  name: 
+  id: 2
+  name: Bookmark2
   url: MyString
   description: MyString
+  tags: "tag1, tag3"
