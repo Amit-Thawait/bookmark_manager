@@ -38,7 +38,8 @@ RSpec.describe BookmarksController, type: :controller do
 
   describe "GET #index" do
     it "assigns all bookmarks as @bookmarks" do
-      bookmark = FactoryGirl.build(:bookmark)#Bookmark.create! valid_attributes
+      # bookmark = Bookmark.create! valid_attributes
+      bookmark = FactoryGirl.build(:bookmark)
       get :index, {}, valid_session
       expect(assigns(:bookmarks)).to eq([bookmark])
     end
