@@ -23,13 +23,9 @@ RSpec.describe BookmarksController, type: :controller do
   # This should return the minimal set of attributes required to create a valid
   # Bookmark. As you add validations to Bookmark, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
-  }
-
-  let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
-  }
+  let(:bookmark) { FactoryGirl.create(:bookmark) }
+  let(:valid_attributes) {  {name: "MyString", url: "MyString", description: "MyString", all_tags: "tag1, tag2"} }
+  let(:invalid_attributes) { {name: '', url: "MyString", description: "MyString", all_tags: "tag1, tag2" } }
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
@@ -38,8 +34,6 @@ RSpec.describe BookmarksController, type: :controller do
 
   describe "GET #index" do
     it "assigns all bookmarks as @bookmarks" do
-      # bookmark = Bookmark.create! valid_attributes
-      bookmark = FactoryGirl.build(:bookmark)
       get :index, {}, valid_session
       expect(assigns(:bookmarks)).to eq([bookmark])
     end
@@ -47,7 +41,6 @@ RSpec.describe BookmarksController, type: :controller do
 
   describe "GET #show" do
     it "assigns the requested bookmark as @bookmark" do
-      bookmark = Bookmark.create! valid_attributes
       get :show, {:id => bookmark.to_param}, valid_session
       expect(assigns(:bookmark)).to eq(bookmark)
     end
@@ -62,7 +55,6 @@ RSpec.describe BookmarksController, type: :controller do
 
   describe "GET #edit" do
     it "assigns the requested bookmark as @bookmark" do
-      bookmark = Bookmark.create! valid_attributes
       get :edit, {:id => bookmark.to_param}, valid_session
       expect(assigns(:bookmark)).to eq(bookmark)
     end
@@ -104,24 +96,22 @@ RSpec.describe BookmarksController, type: :controller do
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        {name: "Bookmark2", url: "http://bookmark2.com", description: "Bookmark 2", all_tags: "tag3, tag4"}
       }
 
       it "updates the requested bookmark" do
-        bookmark = Bookmark.create! valid_attributes
         put :update, {:id => bookmark.to_param, :bookmark => new_attributes}, valid_session
         bookmark.reload
-        skip("Add assertions for updated state")
+        updated_attrs = assigns(:bookmark).attributes.slice("name", "url", "description").merge("all_tags" => bookmark.all_tags).symbolize_keys
+        expect(updated_attrs).to eq(new_attributes)
       end
 
       it "assigns the requested bookmark as @bookmark" do
-        bookmark = Bookmark.create! valid_attributes
         put :update, {:id => bookmark.to_param, :bookmark => valid_attributes}, valid_session
         expect(assigns(:bookmark)).to eq(bookmark)
       end
 
       it "redirects to the bookmark" do
-        bookmark = Bookmark.create! valid_attributes
         put :update, {:id => bookmark.to_param, :bookmark => valid_attributes}, valid_session
         expect(response).to redirect_to(bookmark)
       end
@@ -129,13 +119,11 @@ RSpec.describe BookmarksController, type: :controller do
 
     context "with invalid params" do
       it "assigns the bookmark as @bookmark" do
-        bookmark = Bookmark.create! valid_attributes
         put :update, {:id => bookmark.to_param, :bookmark => invalid_attributes}, valid_session
         expect(assigns(:bookmark)).to eq(bookmark)
       end
 
       it "re-renders the 'edit' template" do
-        bookmark = Bookmark.create! valid_attributes
         put :update, {:id => bookmark.to_param, :bookmark => invalid_attributes}, valid_session
         expect(response).to render_template("edit")
       end
@@ -144,14 +132,13 @@ RSpec.describe BookmarksController, type: :controller do
 
   describe "DELETE #destroy" do
     it "destroys the requested bookmark" do
-      bookmark = Bookmark.create! valid_attributes
+      bookmark = FactoryGirl.create(:bookmark)
       expect {
         delete :destroy, {:id => bookmark.to_param}, valid_session
       }.to change(Bookmark, :count).by(-1)
     end
 
     it "redirects to the bookmarks list" do
-      bookmark = Bookmark.create! valid_attributes
       delete :destroy, {:id => bookmark.to_param}, valid_session
       expect(response).to redirect_to(bookmarks_url)
     end

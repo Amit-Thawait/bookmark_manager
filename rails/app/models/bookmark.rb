@@ -1,5 +1,7 @@
 class Bookmark < ActiveRecord::Base
 
+  validates :name, :url, presence: true
+
   has_many :taggings, dependent: :destroy
 
   has_many :tags, through: :taggings
@@ -7,8 +9,10 @@ class Bookmark < ActiveRecord::Base
   # after_save :associate_tags
 
   def all_tags=(names)
-    self.tags = names.split(',').map do |name|
-      Tag.where(name: name.strip).first_or_create!
+    if names.present?
+      self.tags = names.split(',').map do |name|
+        Tag.where(name: name.strip).first_or_create!
+      end
     end
   end
 
