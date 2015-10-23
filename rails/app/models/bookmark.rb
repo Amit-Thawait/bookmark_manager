@@ -1,6 +1,8 @@
 class Bookmark < ActiveRecord::Base
 
-  validates :name, :url, presence: true
+  validates :name, presence: true
+
+  validates :url, presence: true, uri: { allowed_protocols: ['http', 'https'], disallowed_protocols: ['ftp', 'ssh'] }
 
   has_many :taggings, dependent: :destroy
 

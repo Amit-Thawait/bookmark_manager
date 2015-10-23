@@ -186,6 +186,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  addressable
   autoprefixer-rails
   awesome_print
   bootstrap-sass (~> 3.3.5)
