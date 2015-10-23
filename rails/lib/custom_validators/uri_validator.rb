@@ -3,7 +3,6 @@ require 'addressable/uri'
 class UriValidator < ActiveModel::EachValidator
 
   def validate_each(record, attribute, value)
-    value = uri_value(value)
     uri = parse_uri(value)
     if !uri
       record.errors[attribute] << generic_failure_message
@@ -31,14 +30,21 @@ class UriValidator < ActiveModel::EachValidator
   end
 
   def parse_uri(value)
+    return false if invalid_uri?(value)
+    value = add_protocol_if_not_present(value)
     uri = Addressable::URI.parse(value)
     uri.scheme && uri.host && uri
   rescue URI::InvalidURIError, Addressable::URI::InvalidURIError, TypeError
   end
 
-  def uri_value(value)
+  def add_protocol_if_not_present(value)
     return value if disallowed_protocols.any? { |protocol| value.include?(protocol) }
     allowed_protocols.any? { |protocol| value.include?(protocol) } ? value : "http://#{value}"
+  end
+
+  def invalid_uri?(uri)
+    uri_parts = uri.split('.')
+    return true if uri_parts.first.blank? || uri_parts.length == 1
   end
 
 end

@@ -18,7 +18,7 @@ describe UriValidator do
     expect(subject.errors.full_messages).to eq([])
   end
 
-  ['http://google', 'http://.com', 'http://ftp://ftp.google.com', 'http://ssh://google.com'].each do |invalid_url|
+  ['http://.com', 'http://ftp://ftp.google.com', 'http://ssh://google.com'].each do |invalid_url|
     it "#{invalid_url.inspect} is a invalid http url" do
       subject.url = invalid_url
       subject.valid?
@@ -26,7 +26,7 @@ describe UriValidator do
     end
   end
 
-  ['http:/www.google.com','<>hi'].each do |invalid_url|
+  ['http:/www.google.com', '<>hi', 'http://google'].each do |invalid_url|
     it "#{invalid_url.inspect} is an invalid url" do
       subject.url = invalid_url
       subject.valid?
