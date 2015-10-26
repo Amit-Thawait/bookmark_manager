@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "bookmarks/index", type: :view do
   before(:each) do
+    skip
     assign(:bookmarks, [
       Bookmark.create!(
         :name => "Name",

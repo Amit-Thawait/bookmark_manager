@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "bookmarks/new", type: :view do
   before(:each) do
+    skip
     assign(:bookmark, Bookmark.new(
       :name => "MyString",
       :url => "MyString",

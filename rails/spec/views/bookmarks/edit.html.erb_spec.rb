@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "bookmarks/edit", type: :view do
   before(:each) do
+    skip
     @bookmark = assign(:bookmark, Bookmark.create!(
       :name => "MyString",
       :url => "MyString",
