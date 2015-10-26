@@ -24,7 +24,7 @@ RSpec.describe BookmarksController, type: :controller do
   # Bookmark. As you add validations to Bookmark, be sure to
   # adjust the attributes here as well.
   let(:bookmark) { FactoryGirl.create(:bookmark) }
-  let(:valid_attributes) {  {name: "MyString", url: "MyString", description: "MyString", all_tags: "tag1, tag2"} }
+  let(:valid_attributes) {  {name: "Google", url: "google.com", description: "Search the whole web", all_tags: "search"} }
   let(:invalid_attributes) { {name: '', url: "MyString", description: "MyString", all_tags: "tag1, tag2" } }
 
   # This should return the minimal set of values that should be in the session
