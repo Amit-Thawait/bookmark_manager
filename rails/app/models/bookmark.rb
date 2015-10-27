@@ -13,7 +13,7 @@ class Bookmark < ActiveRecord::Base
   def all_tags=(names)
     if names.present?
       self.tags = names.split(',').map do |name|
-        Tag.where(name: name.strip).first_or_create!
+        Tag.where(name: name.strip).first_or_create! unless name.strip.blank?
       end
     end
   end

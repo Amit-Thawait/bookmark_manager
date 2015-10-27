@@ -24,5 +24,9 @@ module BookmarkManager
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+
+    # Middleware for auto-complete
+    config.middleware.insert_after ActionDispatch::Session::CookieStore, "AutoCompleter"
+
   end
 end
