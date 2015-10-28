@@ -46,6 +46,8 @@ group :development, :test do
 
   gem 'factory_girl_rails'
 
+  gem 'dotenv-rails', :require => 'dotenv/rails-now'
+
 end
 
 gem 'bootstrap-sass', '~> 3.3.5'
@@ -63,3 +65,7 @@ group :development do
 end
 
 gem 'addressable'
+
+gem 'omniauth-github', :github => 'intridea/omniauth-github'
+
+gem 'omniauth-twitter', :github => 'arunagw/omniauth-twitter'
