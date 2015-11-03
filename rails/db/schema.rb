@@ -11,10 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150715070943) do
+ActiveRecord::Schema.define(version: 20151102063956) do
 
   create_table "bookmarks", force: :cascade do |t|
-    t.string   "name",        limit: 255, null: false
+    t.string   "name",        limit: 255
     t.string   "url",         limit: 255, null: false
     t.string   "description", limit: 255
     t.datetime "created_at",              null: false
@@ -22,6 +22,17 @@ ActiveRecord::Schema.define(version: 20150715070943) do
   end
 
   add_index "bookmarks", ["url"], name: "index_bookmarks_on_url", using: :btree
+
+  create_table "identities", force: :cascade do |t|
+    t.string   "provider",   limit: 255, null: false
+    t.string   "uid",        limit: 255, null: false
+    t.integer  "user_id",    limit: 4
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "identities", ["provider", "uid"], name: "identities_provider_uid", unique: true, using: :btree
+  add_index "identities", ["user_id"], name: "index_identities_on_user_id", using: :btree
 
   create_table "taggings", force: :cascade do |t|
     t.integer  "bookmark_id", limit: 4
@@ -41,6 +52,16 @@ ActiveRecord::Schema.define(version: 20150715070943) do
 
   add_index "tags", ["name"], name: "index_tags_on_name", using: :btree
 
+  create_table "users", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.string   "email",      limit: 255, null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "users", ["email"], name: "users_email", unique: true, using: :btree
+
+  add_foreign_key "identities", "users"
   add_foreign_key "taggings", "bookmarks"
   add_foreign_key "taggings", "tags"
 end
