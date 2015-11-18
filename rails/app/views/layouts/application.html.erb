@@ -10,16 +10,26 @@
 
   <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
-      <div class="navbar-header">
+      <div class="navbar-header col-md-3">
         <a class="navbar-brand" href="#">
           <img alt="Brand" src="/assets/bookmark_logo.png">
         </a>
       </div>
+      <% if session[:user_id].present? %>
+        Signed in as <%= current_user.email %>
+        <div id="logout-section" class="col-md-9">
+          <ul>
+            <li><a href="/logout">Logout from this application</a></li>
+            <li><a href="/logout_provider">Logout from <%= session[:provider] %> as well</a></li>
+          </ul>
+        </div>
+      <% end %>
     </div>
   </nav>
 
   <div class="container padding-left-100">
     <div class="row">
+      <%= render 'layouts/messages' %>
       <%= yield %>
     </div>
   </div>

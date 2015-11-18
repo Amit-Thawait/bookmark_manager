@@ -10,6 +10,10 @@ Rails.application.routes.draw do
 
   get '/auth/:provider/callback', to: 'authentications#create'
 
+  get '/logout', to: 'authentications#destroy'
+
+  get '/logout_provider', to: 'authentications#destroy_provider_session'
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
