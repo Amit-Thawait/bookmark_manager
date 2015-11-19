@@ -21,7 +21,7 @@ class AuthenticationsController < ApplicationController
   def destroy
     session_destroyed = session.delete(:user_id).present?
     after_destroy(session_destroyed)
-    redirect_to root_url if session_destroyed
+    redirect_to root_url
   end
 
   def destroy_provider_session
