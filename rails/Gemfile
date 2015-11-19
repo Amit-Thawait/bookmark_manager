@@ -48,6 +48,8 @@ group :development, :test do
 
   gem 'dotenv-rails', :require => 'dotenv/rails-now'
 
+  gem 'pry'
+
 end
 
 gem 'bootstrap-sass', '~> 3.3.5'
@@ -66,6 +68,8 @@ end
 
 gem 'addressable'
 
-gem 'omniauth-github', :github => 'intridea/omniauth-github'
+gem 'omniauth-github', github: 'intridea/omniauth-github'
 
-gem 'omniauth-twitter', :github => 'arunagw/omniauth-twitter'
+gem 'omniauth-twitter', github: 'arunagw/omniauth-twitter'
+
+gem 'omniauth-google-oauth2', github: 'zquestz/omniauth-google-oauth2'

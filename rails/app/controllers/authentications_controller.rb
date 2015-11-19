@@ -27,7 +27,7 @@ class AuthenticationsController < ApplicationController
   def destroy_provider_session
     session_destroyed = session.delete(:user_id).present?
     after_destroy(session_destroyed)
-    redirect_to "https://www.github.com/logout?access_token=#{session[:access_token]}&redirect_url=#{root_url}"
+    redirect_to provider_logout_url(session[:provider])
   end
 
   private def after_destroy(secrets_destroyed)
@@ -36,6 +36,15 @@ class AuthenticationsController < ApplicationController
     else
       flash[:notice] = "There was problem in logging you out. Please refersh the page to check if you are still signed-in \
         and then try again"
+    end
+  end
+
+  private def provider_logout_url(provider)
+    case provider
+    when 'github'
+      "https://www.github.com/logout?access_token=#{session[:access_token]}&redirect_url=#{root_url}"
+    when 'google_oauth2'
+      "https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=#{root_url}"
     end
   end
 
