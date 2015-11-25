@@ -7,9 +7,9 @@ Rails.application.config.middleware.use OmniAuth::Builder do
   provider :google_oauth2, ENV['GOOGLE_CLIENT_ID'], ENV['GOOGLE_CLIENT_SECRET']
 
   # TWITTER
-  provider :twitter, ENV['API_KEY'], ENV['API_SECRET']
+  provider :twitter, ENV['TWITTER_API_KEY'], ENV['TWITTER_API_SECRET']
 
-  # FACEBOOK
-  provider :facebook, ENV['FACEBOOK_KEY'], ENV['FACEBOOK_SECRET']
+  # # FACEBOOK
+  # provider :facebook, ENV['FACEBOOK_KEY'], ENV['FACEBOOK_SECRET']
 
 end

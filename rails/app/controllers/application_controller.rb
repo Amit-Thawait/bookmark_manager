@@ -8,6 +8,8 @@ class ApplicationController < ActionController::Base
   protected
 
   def current_user
+    raise 'There is some problem fetching the User details. \
+      Please email if this issue persists.' if session[:user_id].blank?
     @current_user ||= User.find(session[:user_id])
   end
 
